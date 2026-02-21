@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - Master Your Productivity</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">FocusFlow</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-ghost">Log In</a>
+                <a href="#" class="btn btn-primary" id="getStartedBtn">Get Started</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="login.html">Log In</a>
+        <a href="#" id="getStartedBtnMobile">Get Started</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-grid"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="badge-pill">
+                <span class="badge-dot"></span>
+                Now in Early Access
+            </div>
+            <h1 class="hero-title">
+                Master Your <span class="gradient-text">Productivity</span><br>
+                Achieve Your Goals
+            </h1>
+            <p class="hero-subtitle">
+                The all-in-one workspace that combines smart tasks, Pomodoro technique, 
+                calendar, goals, habits, and analytics. Transform how you work.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary btn-lg" id="heroGetStarted">
+                    <i class="fas fa-rocket"></i>
+                    Start Free
+                </a>
+                <a href="#features" class="btn btn-outline btn-lg">
+                    <i class="fas fa-play"></i>
+                    See Features
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="50000">0</span>
+                    <span class="stat-label">+ Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="98">0</span>
+                    <span class="stat-label">% Satisfaction</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="10">0</span>
+                    <span class="stat-label">M+ Focus Hours</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="app-preview">
+                <div class="preview-header">
+                    <div class="preview-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="preview-title">FocusFlow Dashboard</span>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-sidebar">
+                        <div class="sidebar-item active"><i class="fas fa-th-large"></i></div>
+                        <div class="sidebar-item"><i class="fas fa-check-square"></i></div>
+                        <div class="sidebar-item"><i class="fas fa-clock"></i></div>
+                        <div class="sidebar-item"><i class="fas fa-calendar"></i></div>
+                        <div class="sidebar-item"><i class="fas fa-chart-bar"></i></div>
+                        <div class="sidebar-item"><i class="fas fa-bullseye"></i></div>
+                    </div>
+                    <div class="preview-main">
+                        <div class="preview-card">
+                            <div class="card-header">
+                                <span>Today's Focus</span>
+                                <span class="timer-preview">25:00</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="preview-tasks">
+                            <div class="task-preview done">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Review project proposal</span>
+                            </div>
+                            <div class="task-preview">
+                                <i class="far fa-circle"></i>
+                                <span>Write blog post</span>
+                            </div>
+                            <div class="task-preview">
+                                <i class="far fa-circle"></i>
+                                <span>Team standup meeting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Features</span>
+                <h2>Everything You Need to <span class="gradient-text">Succeed</span></h2>
+                <p>Powerful tools designed to help you focus, organize, and achieve more.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart Tasks</h3>
+                    <p>Intelligent task management with priorities, categories, subtasks, and recurring deadlines.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <h3>Pomodoro Timer</h3>
+                    <p>Built-in focus timer with customizable sessions, breaks, and daily focus goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Smart Calendar</h3>
+                    <p>Visual calendar that syncs with your tasks and shows your schedule at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Track your productivity with detailed insights, heatmaps, and performance scores.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Goals & Habits</h3>
+                    <p>Set daily and weekly goals, track habits, and build streaks that keep you motivated.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <h3>Notes</h3>
+                    <p>Quick notes and ideas capture with our clean, distraction-free editor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2>Get Started in <span class="gradient-text">3 Steps</span></h2>
+                <p>Start boosting your productivity in minutes.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Create Your Account</h3>
+                        <p>Sign up with your email and get instant access to all features. No credit card required.</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Set Your Goals</h3>
+                        <p>Define what you want to achieve. Set daily tasks, habits, and focus time goals.</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Start Focusing</h3>
+                        <p>Use the Pomodoro timer, track your progress, and watch your productivity soar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Preview Section -->
+    <section class="app-preview-section">
+        <div class="container">
+            <div class="preview-grid">
+                <div class="preview-info">
+                    <span class="section-tag">Dashboard</span>
+                    <h2>Your Command Center for <span class="gradient-text">Productivity</span></h2>
+                    <p>Everything you need in one beautiful, intuitive interface.</p>
+                    <ul class="preview-features">
+                        <li><i class="fas fa-check"></i> Real-time task updates</li>
+                        <li><i class="fas fa-check"></i> Focus session tracking</li>
+                        <li><i class="fas fa-check"></i> Visual analytics</li>
+                        <li><i class="fas fa-check"></i> Streak gamification</li>
+                        <li><i class="fas fa-check"></i> Achievement badges</li>
+                    </ul>
+                </div>
+                <div class="preview-image">
+                    <div class="dashboard-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="mockup-sidebar">
+                                <div class="mockup-nav-item active"></div>
+                                <div class="mockup-nav-item"></div>
+                                <div class="mockup-nav-item"></div>
+                                <div class="mockup-nav-item"></div>
+                            </div>
+                            <div class="mockup-content">
+                                <div class="mockup-cards">
+                                    <div class="mockup-card"></div>
+                                    <div class="mockup-card"></div>
+                                </div>
+                                <div class="mockup-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2>Loved by <span class="gradient-text">Productivity</span> Enthusiasts</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-info">
+                            <h4>John Doe</h4>
+                            <span>Product Manager</span>
+                        </div>
+                    </div>
+                    <p>"FocusFlow transformed how I work. The combination of tasks, timer, and analytics keeps me focused and motivated."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">SW</div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Wilson</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                    <p>"The Pomodoro integration is a game-changer. I've doubled my coding output since using FocusFlow."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">MB</div>
+                        <div class="testimonial-info">
+                            <h4>Mike Brown</h4>
+                            <span>Content Creator</span>
+                        </div>
+                    </div>
+                    <p>"The habit tracking and streak system keeps me accountable. Best productivity app I've used!"</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pricing</span>
+                <h2>Simple, <span class="gradient-text">Free</span> Pricing</h2>
+                <p>Start for free, upgrade when you're ready.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MOST POPULAR</div>
+                    <h3>Early Access</h3>
+                    <div class="pricing-price">
+                        <span class="price">FREE</span>
+                        <span class="period">forever</span>
+                    </div>
+                    <p>Get full access to all features while we're in early access.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited Tasks</li>
+                        <li><i class="fas fa-check"></i> Pomodoro Timer</li>
+                        <li><i class="fas fa-check"></i> Calendar View</li>
+                        <li><i class="fas fa-check"></i> Analytics & Insights</li>
+                        <li><i class="fas fa-check"></i> Goals & Habits</li>
+                        <li><i class="fas fa-check"></i> Notes</li>
+                        <li><i class="fas fa-check"></i> Achievements</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-block" id="pricingGetStarted">Get Started Free</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Pro Plan</h3>
+                    <div class="pricing-price">
+                        <span class="price">$9</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p>Unlock advanced features and priority support.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Early Access to New Features</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-block">Coming Soon</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Student</h3>
+                    <div class="pricing-price">
+                        <span class="price">$0</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p>Free for students with valid ID.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> Student Support</li>
+                        <li><i class="fas fa-check"></i> Academic Resources</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-block">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is FocusFlow really free?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! During our early access period, FocusFlow is completely free. We'll announce pricing for the full version soon.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is my data secure?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We use localStorage to keep your data on your device. We don't access or store your personal information on our servers.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the Pomodoro timer work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Pomodoro technique uses 25-minute focus sessions followed by 5-minute breaks. After 4 sessions, take a longer 15-30 minute break.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I use FocusFlow offline?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! FocusFlow works completely offline. All your data is stored locally in your browser.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I track my progress?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our Analytics section provides detailed insights including tasks completed, focus hours, productivity scores, and streak tracking.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's the access code?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Leave empty for free access. Use code "ff9" for Pro plan, or "student21" for the student plan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Boost Your Productivity?</h2>
+                <p>Join thousands of users already mastering their workflow with FocusFlow.</p>
+                <a href="#" class="btn btn-primary btn-lg" id="ctaGetStarted">
+                    <i class="fas fa-rocket"></i>
+                    Get Started Free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">FocusFlow</span>
+                    </a>
+                    <p>Master your productivity with smart tasks, Pomodoro technique, and powerful analytics.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">Changelog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Careers</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FocusFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Access Code Modal -->
+    <div class="modal-overlay" id="accessModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h3>Enter Access Code</h3>
+                <p>Get your free access to FocusFlow</p>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="accessCode">Access Code (Optional)</label>
+                    <input type="text" id="accessCode" placeholder="Enter code or leave empty for free">
+                    <span class="form-hint">Leave empty for free access • ff9 for Pro • student21 for Student</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Your name">
+                </div>
+                <button class="btn btn-primary btn-block" onclick="submitAccess()">
+                    Create Account
+                </button>
+            </div>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="login.html">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

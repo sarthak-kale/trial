@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="FocusFlow - Master your productivity with smart tasks, Pomodoro technique, and powerful analytics">
+    <meta name="theme-color" content="#020617">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FocusFlow">
+    <title>FocusFlow - Your Productivity Workspace</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">FocusFlow</span>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+    
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="userInitials">U</div>
+                    <div class="user-info">
+                        <div class="user-name" id="userName">User</div>
+                        <div class="user-plan" id="userPlan">Free</div>
+                    </div>
+                </div>
+            </div>
+            
+<nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <button class="nav-item active" data-target="dashboard" onclick="navigateTo('dashboard')">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="nav-item" data-target="tasks" onclick="navigateTo('tasks')">
+                        <i class="fas fa-check-square"></i>
+                        <span>Tasks</span>
+                        <span class="nav-badge" id="taskBadge">0</span>
+                    </button>
+                    <button class="nav-item" data-target="pomodoro" onclick="navigateTo('pomodoro')">
+                        <i class="fas fa-clock"></i>
+                        <span>Pomodoro</span>
+                    </button>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Organize</div>
+                    <button class="nav-item" data-target="calendar" onclick="navigateTo('calendar')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Calendar</span>
+                    </button>
+                    <button class="nav-item" data-target="habits" onclick="navigateTo('habits')">
+                        <i class="fas fa-check-double"></i>
+                        <span>Habits</span>
+                    </button>
+                    <button class="nav-item" data-target="goals" onclick="navigateTo('goals')">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Goals</span>
+                    </button>
+                    <button class="nav-item" data-target="notes" onclick="navigateTo('notes')">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>Notes</span>
+                    </button>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Insights</div>
+                    <button class="nav-item" data-target="insights" onclick="navigateTo('insights')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Insights</span>
+                    </button>
+                    <button class="nav-item" data-target="achievements" onclick="navigateTo('achievements')">
+                        <i class="fas fa-trophy"></i>
+                        <span>Achievements</span>
+                    </button>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="nav-item" data-target="profile" onclick="navigateTo('profile')">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Settings</span>
+                </button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="app-main">
+            
+            <!-- Dashboard Section -->
+            <section class="page-section active" id="dashboard">
+                <div class="app-header">
+                    <h1 class="page-title">Dashboard</h1>
+                    <div class="header-actions">
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-card-icon primary">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card-value" id="todayTasksCount">0</div>
+                        <div class="stat-card-label">Today's Tasks</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-card-icon success">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card-value" id="focusMinutes">0</div>
+                        <div class="stat-card-label">Focus Minutes</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-card-icon warning">
+                                <i class="fas fa-fire streak-fire"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card-value" id="currentStreak">0</div>
+                        <div class="stat-card-label">Day Streak 🔥</div>
+                    </div>
+                    
+                    <div class="pomodoro-widget">
+                        <h3 style="margin-bottom: var(--spacing-lg);">Quick Pomodoro</h3>
+                        <div class="pomodoro-timer">
+                            <div class="timer-display" id="pomodoroTimer">25:00</div>
+                            <div class="timer-controls">
+                                <button class="btn btn-primary" id="pomodoroStart" onclick="startPomodoro()">
+                                    <i class="fas fa-play"></i> Start
+                                </button>
+                                <button class="btn btn-outline hidden" id="pomodoroPause" onclick="pausePomodoro()">
+                                    <i class="fas fa-pause"></i> Pause
+                                </button>
+                                <button class="btn btn-ghost" onclick="resetPomodoro()">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                            <div class="session-info">
+                                <span>Session <span id="sessionNumber">1</span>/4</span>
+                                <div>
+                                    <span class="session-dot"></span>
+                                    <span class="session-dot"></span>
+                                    <span class="session-dot"></span>
+                                    <span class="session-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tasks-container" style="margin-top: var(--spacing-lg);">
+                    <div class="tasks-header">
+                        <h3>Recent Tasks</h3>
+                    </div>
+                    <div id="recentTasks">
+                        <!-- Tasks will be loaded here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tasks Section -->
+            <section class="page-section" id="tasks">
+                <div class="app-header">
+                    <h1 class="page-title">Tasks</h1>
+                </div>
+                
+                <div class="tasks-container">
+                    <div class="add-task-form">
+                        <input type="text" class="add-task-input" id="taskInput" placeholder="Add a new task..." onkeypress="if(event.key==='Enter')addTask()">
+                        <select class="add-task-select" id="taskCategory">
+                            <option value="personal">Personal</option>
+                            <option value="work">Work</option>
+                            <option value="study">Study</option>
+                        </select>
+                        <select class="add-task-select" id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <input type="date" class="add-task-select" id="taskDueDate">
+                        <button class="btn btn-primary" onclick="addTask()">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                    
+                    <div class="tasks-filters">
+                        <button class="filter-btn active" data-filter="today" onclick="filterTasks('today')">Today</button>
+                        <button class="filter-btn" data-filter="upcoming" onclick="filterTasks('upcoming')">Upcoming</button>
+                        <button class="filter-btn" data-filter="completed" onclick="filterTasks('completed')">Completed</button>
+                    </div>
+                    
+                    <input type="hidden" id="taskFilter" value="today">
+                    
+                    <div class="task-list" id="taskList">
+                        <!-- Tasks will be loaded here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Pomodoro Section -->
+            <section class="page-section" id="pomodoro">
+                <div class="app-header">
+                    <h1 class="page-title">Pomodoro Timer</h1>
+                </div>
+                
+                <div class="pomodoro-widget" style="max-width: 600px; margin: 0 auto;">
+                    <div class="pomodoro-timer">
+                        <div class="timer-display" id="pomodoroTimerFull">25:00</div>
+                        <div class="timer-controls">
+                            <button class="btn btn-primary btn-lg" id="pomodoroStartFull" onclick="startPomodoro()">
+                                <i class="fas fa-play"></i> Start
+                            </button>
+                            <button class="btn btn-outline btn-lg hidden" id="pomodoroPauseFull" onclick="pausePomodoro()">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="btn btn-ghost btn-lg" onclick="resetPomodoro()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                        <div class="session-info">
+                            <span>Session <span id="sessionNumberFull">1</span>/4</span>
+                            <div>
+                                <span class="session-dot"></span>
+                                <span class="session-dot"></span>
+                                <span class="session-dot"></span>
+                                <span class="session-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: var(--spacing-xl); text-align: center;">
+                        <p class="text-muted">Complete focused work sessions using the Pomodoro technique. Work for 25 minutes, then take a 5-minute break!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Calendar Section -->
+            <section class="page-section" id="calendar">
+                <div class="app-header">
+                    <h1 class="page-title">Calendar</h1>
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h2 class="calendar-month" id="calendarMonth">January 2024</h2>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" onclick="prevMonth()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="calendar-nav-btn" onclick="nextMonth()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be rendered here -->
+                    </div>
+                    
+                    <div class="calendar-tasks" id="calendarTasks">
+                        <h3 class="calendar-tasks-title">Tasks for selected day</h3>
+                        <p class="text-muted">Select a day to view tasks</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Insights Section -->
+            <section class="page-section" id="insights">
+                <div class="app-header">
+                    <h1 class="page-title">Insights</h1>
+                </div>
+                
+                <div class="analytics-container">
+                    <div class="analytics-card">
+                        <h3 class="analytics-card-title">Weekly Progress</h3>
+                        <div class="chart-container" id="weeklyChart">
+                            <!-- Chart will be rendered here -->
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <h3 class="analytics-card-title">Focus Statistics</h3>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-value" id="totalTasksCreated">0</div>
+                            <div class="analytics-stat-label">Total Tasks Created</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-value" id="completedTasksCount">0</div>
+                            <div class="analytics-stat-label">Completed Tasks</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <h3 class="analytics-card-title">Performance</h3>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-value" id="totalFocusMinutesInsight">0</div>
+                            <div class="analytics-stat-label">Total Focus Minutes</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-value" id="insightCurrentStreak">0</div>
+                            <div class="analytics-stat-label">Current Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Habits Section -->
+            <section class="page-section" id="habits">
+                <div class="app-header">
+                    <h1 class="page-title">Habits</h1>
+                </div>
+                
+                <div class="habits-container">
+                    <div class="add-task-form">
+                        <input type="text" class="add-task-input" id="habitInput" placeholder="Add a new habit..." onkeypress="if(event.key==='Enter')addHabit()">
+                        <button class="btn btn-primary" onclick="addHabit()">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                    
+                    <div id="habitsList">
+                        <!-- Habits will be loaded here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Goals Section -->
+            <section class="page-section" id="goals">
+                <div class="app-header">
+                    <h1 class="page-title">Goals</h1>
+                </div>
+                
+                <div class="goals-container">
+                    <div class="goal-section">
+                        <h3 class="goal-section-title">
+                            <i class="fas fa-sun"></i> Daily Goals
+                        </h3>
+                        <div class="add-task-form">
+                            <input type="text" class="add-task-input" id="dailyGoalInput" placeholder="Daily goal...">
+                            <input type="number" class="add-task-select" id="dailyGoalTarget" placeholder="Target" min="1" value="1" style="width: 80px;">
+                            <button class="btn btn-primary" onclick="addGoal('daily')">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div id="dailyGoals">
+                            <!-- Daily goals will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="goal-section">
+                        <h3 class="goal-section-title">
+                            <i class="fas fa-calendar-week"></i> Weekly Goals
+                        </h3>
+                        <div class="add-task-form">
+                            <input type="text" class="add-task-input" id="weeklyGoalInput" placeholder="Weekly goal...">
+                            <input type="number" class="add-task-select" id="weeklyGoalTarget" placeholder="Target" min="1" value="1" style="width: 80px;">
+                            <button class="btn btn-primary" onclick="addGoal('weekly')">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div id="weeklyGoals">
+                            <!-- Weekly goals will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Notes Section -->
+            <section class="page-section" id="notes">
+                <div class="app-header">
+                    <h1 class="page-title">Notes</h1>
+                </div>
+                
+                <div class="notes-container" id="notesGrid">
+                    <!-- Notes will be loaded here -->
+                </div>
+            </section>
+            
+            <!-- Achievements Section -->
+            <section class="page-section" id="achievements">
+                <div class="app-header">
+                    <h1 class="page-title">Achievements</h1>
+                </div>
+                
+                <div class="achievements-grid" id="achievementsList">
+                    <!-- Achievements will be loaded here -->
+                </div>
+            </section>
+            
+            <!-- Profile/Settings Section -->
+            <section class="page-section" id="profile">
+                <div class="app-header">
+                    <h1 class="page-title">Settings</h1>
+                </div>
+                
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar-large" id="profileAvatar">U</div>
+                        <div class="profile-info">
+                            <h2 id="profileName">User</h2>
+                            <span class="profile-plan-badge" id="profilePlan">Free Plan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="profile-section-title">Appearance</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Light Mode</div>
+                                    <div class="setting-description">Switch between light and dark themes</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="themeToggle" onchange="saveSettings()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Accent Color</div>
+                                    <div class="setting-description">Choose your preferred accent color</div>
+                                </div>
+                                <div class="color-options">
+                                    <div class="color-option selected" data-color="#6366f1" style="background: #6366f1;" onclick="setAccentColor('#6366f1')"></div>
+                                    <div class="color-option" data-color="#10b981" style="background: #10b981;" onclick="setAccentColor('#10b981')"></div>
+                                    <div class="color-option" data-color="#f59e0b" style="background: #f59e0b;" onclick="setAccentColor('#f59e0b')"></div>
+                                    <div class="color-option" data-color="#ef4444" style="background: #ef4444;" onclick="setAccentColor('#ef4444')"></div>
+                                    <div class="color-option" data-color="#8b5cf6" style="background: #8b5cf6;" onclick="setAccentColor('#8b5cf6')"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="profile-section-title">Pomodoro Settings</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Work Duration (minutes)</div>
+                                </div>
+                                <input type="number" class="add-task-select" id="pomodoroWork" value="25" min="1" max="60" style="width: 80px;" onchange="saveSettings()">
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Break Duration (minutes)</div>
+                                </div>
+                                <input type="number" class="add-task-select" id="pomodoroBreak" value="5" min="1" max="30" style="width: 80px;" onchange="saveSettings()">
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Long Break Duration (minutes)</div>
+                                </div>
+                                <input type="number" class="add-task-select" id="pomodoroLongBreak" value="15" min="1" max="60" style="width: 80px;" onchange="saveSettings()">
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Auto-start Break</div>
+                                    <div class="setting-description">Automatically start break after work session</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoStartBreak" onchange="saveSettings()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Sound Notifications</div>
+                                    <div class="setting-description">Play sound when timer completes</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="soundEnabled" checked onchange="saveSettings()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <button class="btn btn-outline" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+</section>
+        </main>
+    </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="bottom-nav-item active" data-target="dashboard" onclick="navigateTo('dashboard')">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </button>
+        <button class="bottom-nav-item" data-target="tasks" onclick="navigateTo('tasks')">
+            <i class="fas fa-check-square"></i>
+            <span>Tasks</span>
+        </button>
+        <button class="bottom-nav-item" data-target="pomodoro" onclick="navigateTo('pomodoro')">
+            <i class="fas fa-clock"></i>
+            <span>Pomodoro</span>
+        </button>
+        <button class="bottom-nav-item" data-target="calendar" onclick="navigateTo('calendar')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Calendar</span>
+        </button>
+        <button class="bottom-nav-item" data-target="insights" onclick="navigateTo('insights')">
+            <i class="fas fa-chart-line"></i>
+            <span>Insights</span>
+        </button>
+    </nav>
+    
+    <!-- Floating Action Button for Tasks (Mobile) -->
+    <button class="fab-button" onclick="openAddTaskModal()" title="Add Task">
+        <i class="fas fa-plus"></i>
+    </button>
+    
+    <!-- Fullscreen Pomodoro Modal (Mobile) -->
+    <div class="fullscreen-modal-overlay" id="fullscreenPomodoro">
+        <div class="fullscreen-modal">
+            <button class="fullscreen-modal-close" onclick="closeFullscreenPomodoro()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="fullscreen-pomodoro">
+                <div class="fullscreen-timer-display" id="fullscreenTimerDisplay">25:00</div>
+                <div class="fullscreen-session-info">
+                    Session <span id="fullscreenSessionNumber">1</span>/4
+                </div>
+                <div class="fullscreen-timer-controls">
+                    <button class="btn btn-primary btn-xl" id="fullscreenPomodoroStart" onclick="startPomodoro()">
+                        <i class="fas fa-play"></i> Start
+                    </button>
+                    <button class="btn btn-outline btn-xl hidden" id="fullscreenPomodoroPause" onclick="pausePomodoro()">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="btn btn-ghost btn-xl" onclick="resetPomodoro()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                <div class="fullscreen-session-dots">
+                    <span class="session-dot"></span>
+                    <span class="session-dot"></span>
+                    <span class="session-dot"></span>
+                    <span class="session-dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Add Task Modal -->
+    <div class="app-modal-overlay" id="mobileAddTaskModal">
+        <div class="app-modal mobile-task-modal">
+            <button class="app-modal-close" onclick="closeMobileTaskModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="app-modal-header">
+                <h3>Add New Task</h3>
+            </div>
+            <div class="form-group">
+                <input type="text" id="mobileTaskInput" class="add-task-input" placeholder="What do you need to do?">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="mobileTaskCategory" class="add-task-select">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="study">Study</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <select id="mobileTaskPriority" class="add-task-select">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Due Date</label>
+                <input type="date" id="mobileTaskDueDate" class="add-task-input">
+            </div>
+            <button class="btn btn-primary btn-block btn-lg" onclick="addMobileTask()">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
+        </div>
+    </div>
+    
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+    
+    <!-- Task Edit Modal -->
+    <div class="app-modal-overlay" id="taskModal">
+        <div class="app-modal">
+            <button class="app-modal-close" onclick="closeModal('taskModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="app-modal-header">
+                <h3>Edit Task</h3>
+            </div>
+            <div class="form-group">
+                <label>Task Title</label>
+                <input type="text" id="editTaskTitle" class="add-task-input">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="editTaskCategory" class="add-task-select">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="study">Study</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <select id="editTaskPriority" class="add-task-select">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Due Date</label>
+                <input type="date" id="editTaskDueDate" class="add-task-input">
+            </div>
+            <input type="hidden" id="editTaskId">
+            <button class="btn btn-primary btn-block" onclick="saveEditedTask()">
+                Save Changes
+            </button>
+        </div>
+    </div>
+    
+    <!-- Note Editor Modal -->
+    <div class="app-modal-overlay" id="noteEditorModal">
+        <div class="app-modal" style="max-width: 600px;">
+            <button class="app-modal-close" onclick="closeModal('noteEditorModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="app-modal-header">
+                <h3>Edit Note</h3>
+            </div>
+            <div class="form-group">
+                <input type="text" id="noteEditorTitle" class="note-editor-title" placeholder="Note title...">
+            </div>
+            <div class="form-group">
+                <textarea id="noteEditorContent" class="note-editor-content" placeholder="Write your note..."></textarea>
+            </div>
+            <input type="hidden" id="noteEditorId">
+            <div style="display: flex; gap: var(--spacing-md);">
+                <button class="btn btn-primary" onclick="saveNote()" style="flex: 1;">
+                    Save Note
+                </button>
+                <button class="btn btn-outline" onclick="deleteNote(document.getElementById('noteEditorId').value)" id="deleteNoteBtn" style="display: none;">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        
+        // Load profile info
+        const user = JSON.parse(localStorage.getItem('focusflow_user') || '{}');
+        if (user.name) {
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileAvatar').textContent = getInitials(user.name);
+            document.getElementById('profilePlan').textContent = (user.plan || 'free') + ' Plan';
+        }
+    </script>
+</body>
+</html>

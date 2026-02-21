@@ -1,0 +1,376 @@
+<!DOCTYPE login.html was created successfully. Now let me create signup.html. html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FocusFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .auth-card {
+            background: var(--gradient-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .auth-header .logo {
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .auth-header h1 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .auth-header p {
+            font-size: var(--font-size-base);
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .auth-form label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 0.875rem var(--spacing-md);
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            transition: all var(--transition-fast);
+        }
+        
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        
+        .auth-form input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .auth-form .btn {
+            width: 100%;
+            margin-top: var(--spacing-md);
+        }
+        
+        .access-code-hint {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .auth-divider span {
+            padding: 0 var(--spacing-md);
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .auth-footer p {
+            font-size: var(--font-size-sm);
+        }
+        
+        .auth-footer a {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+        
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--error);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-sm);
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-sm);
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">FocusFlow</span>
+                    </a>
+                    <h1>Create Account</h1>
+                    <p>Start your productivity journey today</p>
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+                
+                <form class="auth-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password (min 6 characters)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accessCode">Access Code (Optional)</label>
+                        <input type="text" id="accessCode" placeholder="Leave empty for free access">
+                        <span class="access-code-hint">Use code "ff9" for Pro, "student21" for Student</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+                
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Sign in</a></p>
+                </div>
+                
+                <div class="auth-footer" style="margin-top: var(--spacing-sm);">
+                    <p><a href="index.html" style="color: var(--text-muted);">← Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('focusflow_logged_in');
+            if (isLoggedIn === 'true') {
+                window.location.href = 'home.html';
+            }
+        });
+        
+        // Signup form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const accessCode = document.getElementById('accessCode').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Validation
+            if (!name || !email || !password) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters.');
+                return;
+            }
+            
+            // Check if user already exists
+            const existingUser = localStorage.getItem('focusflow_user');
+            if (existingUser) {
+                const user = JSON.parse(existingUser);
+                if (user.email === email) {
+                    showError('An account with this email already exists. Please login.');
+                    return;
+                }
+            }
+            
+            // Determine plan based on access code
+            let plan = 'free';
+            if (accessCode === 'ff9') {
+                plan = 'pro';
+            } else if (accessCode === 'student21') {
+                plan = 'student';
+            }
+            
+            // Save user data
+            const userData = {
+                email: email,
+                name: name,
+                plan: plan,
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('focusflow_user', JSON.stringify(userData));
+            localStorage.setItem('focusflow_logged_in', 'true');
+            
+            // Initialize default data
+            initDefaultData();
+            
+            // Show success and redirect
+            successMessage.textContent = 'Account created successfully! Redirecting...';
+            successMessage.classList.add('show');
+            
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        });
+        
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.remove('show');
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+        
+        function initDefaultData() {
+            // Initialize tasks array
+            if (!localStorage.getItem('focusflow_tasks')) {
+                localStorage.setItem('focusflow_tasks', JSON.stringify([]));
+            }
+            
+            // Initialize pomodoro sessions
+            if (!localStorage.getItem('focusflow_pomodoro')) {
+                localStorage.setItem('focusflow_pomodoro', JSON.stringify({
+                    totalSessions: 0,
+                    totalMinutes: 0,
+                    todaySessions: 0,
+                    todayMinutes: 0,
+                    lastSessionDate: null
+                }));
+            }
+            
+            // Initialize streak
+            if (!localStorage.getItem('focusflow_streak')) {
+                localStorage.setItem('focusflow_streak', JSON.stringify({
+                    current: 0,
+                    longest: 0,
+                    lastActiveDate: null
+                }));
+            }
+            
+            // Initialize goals
+            if (!localStorage.getItem('focusflow_goals')) {
+                localStorage.setItem('focusflow_goals', JSON.stringify({
+                    daily: [],
+                    weekly: []
+                }));
+            }
+            
+            // Initialize habits
+            if (!localStorage.getItem('focusflow_habits')) {
+                localStorage.setItem('focusflow_habits', JSON.stringify([]));
+            }
+            
+            // Initialize notes
+            if (!localStorage.getItem('focusflow_notes')) {
+                localStorage.setItem('focusflow_notes', JSON.stringify([]));
+            }
+            
+            // Initialize achievements
+            if (!localStorage.getItem('focusflow_achievements')) {
+                localStorage.setItem('focusflow_achievements', JSON.stringify({
+                    badges: [],
+                    firstTask: false,
+                    sevenDayStreak: false,
+                    tenPomodoros: false,
+                    hundredTasks: false
+                }));
+            }
+            
+            // Initialize settings
+            if (!localStorage.getItem('focusflow_settings')) {
+                localStorage.setItem('focusflow_settings', JSON.stringify({
+                    theme: 'dark',
+                    accentColor: '#6366f1',
+                    pomodoroWork: 25,
+                    pomodoroBreak: 5,
+                    pomodoroLongBreak: 15,
+                    autoStartBreak: false,
+                    soundEnabled: true
+                }));
+            }
+        }
+    </script>
+</body>
+</html>
